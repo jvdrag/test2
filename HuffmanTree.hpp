@@ -8,8 +8,7 @@
 class HuffmanTree : public HuffmanTreeBase {
 public:
     HuffmanTree();
-    ~HuffmanTree();
-
+    virtual ~HuffmanTree();
     virtual std::string compress(const std::string inputStr) override;
     virtual std::string serializeTree() const override;
     virtual std::string decompress(const std::string inputCode, const std::string serializedTree) override;
@@ -23,8 +22,8 @@ private:
     void deleteTree(HuffmanNode* node);
 
     // Added declarations for the helper methods
-    std::string serializeHelper(HuffmanNode* node) const;
-    HuffmanNode* deserializeHelper(const std::string& serializedTree, size_t& index);
+    // std::string serializeHelper(HuffmanNode* node) const;
+    // HuffmanNode* deserializeHelper(const std::string& serializedTree, size_t& index);
 };
 
 #endif /* HUFFMANTREE_H */
