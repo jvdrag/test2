@@ -2,28 +2,32 @@
 #define HUFFMANTREE_H
 
 #include "HuffmanBase.hpp"
+#include "HeapQueue.hpp"
+#include <map>
 #include <queue>
-#include <unordered_map>
+#include <functional>
+#include <string>
+#include <iostream>
 
+// HuffmanTree class definition
 class HuffmanTree : public HuffmanTreeBase {
-public:
-    HuffmanTree();
-    virtual ~HuffmanTree();
-    virtual std::string compress(const std::string inputStr) override;
-    virtual std::string serializeTree() const override;
-    virtual std::string decompress(const std::string inputCode, const std::string serializedTree) override;
-
 private:
     HuffmanNode* root;
-    std::unordered_map<char, std::string> charCodes;
+    std::map<char, std::string> huffmanCodes;
+    std::map<std::string, char> reverseHuffmanCodes;
 
-    void buildTree(const std::unordered_map<char, size_t>& frequencies);
-    void generateCodes(HuffmanNode* node, const std::string& code);
-    void deleteTree(HuffmanNode* node);
+    //void printTree(const HuffmanNode* node, const std::string& prefix = "", bool isLeft = true) const;
 
-    // Added declarations for the helper methods
-    // std::string serializeHelper(HuffmanNode* node) const;
-    // HuffmanNode* deserializeHelper(const std::string& serializedTree, size_t& index);
+
+public:
+    HuffmanTree() : root(nullptr) {}
+    ~HuffmanTree();
+
+    std::string compress(const std::string inputStr) override;
+    std::string serializeTree() const override;
+    std::string decompress(const std::string inputCode, const std::string serializedTree) override;
+
+    bool isValidSerializedTree(const std::string& serializedTree);
 };
 
 #endif /* HUFFMANTREE_H */
